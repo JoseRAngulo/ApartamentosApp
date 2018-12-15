@@ -1,0 +1,11 @@
+<div *ngIf="apartamento">
+  <h2>Apartamento {{apartamento.id}} Detalles</h2>
+  
+  <div>
+    Nombre Inquilino: {{apartamento.cliente}} <br>
+    <a routerLink="/pagos/{{apartamento.id}}">Talonario</a>  
+    
+  </div>
+  <button (click)="goBack()">Regresar</button>
+  
+</div>  

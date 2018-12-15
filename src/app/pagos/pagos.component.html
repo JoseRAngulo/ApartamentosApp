@@ -1,0 +1,10 @@
+<h2>Facturas</h2>
+<ul class="">
+  <li *ngFor="let factura of facturas">
+    
+      <span class="badge">{{factura.id}}: {{factura.fecha}}</span>
+      <input type="number" #monto>
+      <button (click)="addPago(monto.value, factura.id)">Pagar</button>  
+    
+  </li>
+</ul>

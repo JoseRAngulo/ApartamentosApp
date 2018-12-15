@@ -1,0 +1,9 @@
+<h2>Mis Apartamentos</h2>
+<ul class="apartamentos">
+  <li *ngFor="let apartamento of apartamentos">
+    <a routerLink="/detalle-apartamento/{{apartamento.id}}">
+      <span class="badge">{{apartamento.id}}</span> Apartamento {{apartamento.nombre}}  
+    </a>
+  </li>
+</ul>
+
