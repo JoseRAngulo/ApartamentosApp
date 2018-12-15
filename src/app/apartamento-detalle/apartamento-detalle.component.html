@@ -1,4 +1,6 @@
-<div *ngIf="apartamento">
+<ng-container *ngIf="apartamento; else elseTemplate">
+  
+<div >
   <h2>Apartamento {{apartamento.id}} Detalles</h2>
   
   <div>
@@ -8,4 +10,10 @@
   </div>
   <button (click)="goBack()">Regresar</button>
   
-</div>  
+</div>
+</ng-container> 
+
+
+<ng-template #elseTemplate>
+    Este apartamento esta desocupado! 
+</ng-template>

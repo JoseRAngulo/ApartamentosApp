@@ -18,6 +18,6 @@ export class DashboardComponent implements OnInit {
 
   getApartamentos(): void {
     this.apartamentoService.getApartamentos()
-      .subscribe(apartamentos => this.apartamentos = apartamentos.slice(1, 5));
+      .subscribe(apartamentos => this.apartamentos = apartamentos);
   }
 }

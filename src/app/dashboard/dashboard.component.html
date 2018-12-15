@@ -1,9 +1,11 @@
 <h3>Apartamentos Libres</h3>
 <div class="grid grid-pad">
-  <a *ngFor="let apartamento of apartamentos" class="col-1-4"
-      routerLink="/detalle-apartamento/{{apartamento.id}}">
-    <div class="module apartamento">
-      <h4>{{apartamento.nombre}}</h4>
-    </div>
-  </a>
+  <div *ngFor="let apartamento of apartamentos">
+    <a *ngIf="apartamento.ocupado === false"  routerLink="/detalle-apartamento/{{apartamento.id}}">
+      <div class="module apartamento">
+        <h4>{{apartamento.nombre}}</h4>
+      </div>
+    </a>
+  </div>
+
 </div>
