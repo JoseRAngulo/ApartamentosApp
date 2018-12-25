@@ -1,0 +1,22 @@
+
+        <div class="container">
+            <mat-form-field>
+                <input matInput #nombre placeholder="Nombre">
+              </mat-form-field>
+              <mat-form-field>
+                <mat-select placeholder="Apartamento" #apartamento>
+                  <mat-option *ngFor="let apartamento of apartamentosLibres" value="{{apartamento.id}}">{{apartamento.nombre}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput #monto placeholder="Cobro Mensual">
+              </mat-form-field>
+              <button mat-raised-button (click)="addContrato(nombre.value, apartamento.value, monto.value);">Agregar</button>  
+        </div>
+            
+        
+    
+
+
+
+

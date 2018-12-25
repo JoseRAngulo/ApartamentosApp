@@ -1,10 +1,59 @@
-<h2>Facturas</h2>
-<ul class="">
-  <li *ngFor="let factura of facturas">
+<div class="container">
+  
     
-      <span class="badge">{{factura.id}}: {{factura.fecha}}</span>
-      <input type="number" #monto>
-      <button (click)="addPago(monto.value, factura.id)">Pagar</button>  
+    <h1>Facturas</h1>
+  <div>
+    <h2>Facturas Electricas</h2>
+    <table *ngIf="facturasElectricas" mat-table #table [dataSource]="facturasElectricas">
+
+        <ng-container matColumnDef="fecha">
+          <th mat-header-cell *matHeaderCellDef> Fecha </th>
+          <td mat-cell *matCellDef="let element"> {{element.factura.fecha}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="monto">
+          <th mat-header-cell *matHeaderCellDef> Debe </th>
+          <td mat-cell *matCellDef="let element"> L. {{element.monto}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="accion">
+            <th mat-header-cell *matHeaderCellDef> Accion </th>
+            <td mat-cell *matCellDef="let element"><button mat-icon-button (click)="openDialog(element.factura.id, element.monto, element.factura.fecha)"><mat-icon>attach_money</mat-icon></button></td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      </table>
+  </div>
+  <div>
+      <h2>Facturas Alquiler</h2>
+      <table *ngIf="facturasElectricas" mat-table #table [dataSource]="facturasAlquiler">
+
+          <ng-container matColumnDef="fecha">
+            <th mat-header-cell *matHeaderCellDef> Fecha </th>
+            <td mat-cell *matCellDef="let element"> {{element.factura.fecha}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="monto">
+            <th mat-header-cell *matHeaderCellDef> Debe </th>
+            <td mat-cell *matCellDef="let element"> L. {{element.monto}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="accion">
+              <th mat-header-cell *matHeaderCellDef> Accion </th>
+              <td mat-cell *matCellDef="let element"><button mat-icon-button (click)="openDialog()"><mat-icon>attach_money</mat-icon></button></td>
+          </ng-container>
+  
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+        </table>
+  </div>
+  
+  
+          
+      
     
-  </li>
-</ul>
+  
+</div>

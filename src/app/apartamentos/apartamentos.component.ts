@@ -14,7 +14,9 @@ export class ApartamentosComponent implements OnInit {
   apartamentos: Apartamento[];
   selectedApartamento: Apartamento;
 
-  constructor(private apartamentoService: ApartamentoService) { }
+  constructor(
+    private apartamentoService: ApartamentoService
+  ) { }
 
   ngOnInit() {
     this.getApartamentos();

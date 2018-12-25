@@ -5,6 +5,8 @@ import { DetalleApartamento } from '../models/apartamento_detalles';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { ApartamentoService } from '../services/apartamento.service';
+import { ContratoService } from '../services/contrato.service';
+import { Contrato } from '../models/contratos';
 
 
 
@@ -19,6 +21,7 @@ export class ApartamentoDetalleComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private apartamentoService: ApartamentoService,
+    private contratoService: ContratoService,
     private location: Location
   ) { }
 
@@ -29,7 +32,13 @@ export class ApartamentoDetalleComponent implements OnInit {
   getApartamento(): void {
     const id = +this.route.snapshot.paramMap.get('id');
     this.apartamentoService.getDetalleApartamento(id)
-      .subscribe(apartamento => this.apartamento = apartamento);
+      .subscribe(apartamento => this.apartamento = apartamento[0]);
+  }
+  empty(): void {
+    this.contratoService.getContrato(this.apartamento.id).subscribe(contrato => {
+      contrato.estado = false;
+      this.contratoService.updateContrato(contrato).subscribe();
+    });
   }
   goBack(): void {
     this.location.back();

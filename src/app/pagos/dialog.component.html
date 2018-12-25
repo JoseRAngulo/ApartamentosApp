@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>Factura {{data.id}} {{data.fecha}}</h1>
+<div mat-dialog-content>
+  <p>Pago</p>
+  <mat-form-field>
+    <input matInput #monto>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button mat-button (click)="addPago(monto.value, data.id)" [mat-dialog-close]="data.animal" cdkFocusInitial>Pagar</button>
+</div>

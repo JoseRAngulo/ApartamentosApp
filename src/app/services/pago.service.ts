@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Factura } from '../models/facturas';
+import { Factura, FacturaA, FacturaE } from '../models/facturas';
 import { Pago } from '../models/pagos';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -26,5 +26,12 @@ export class PagoService {
 
   addPago(p: Pago): Observable<Pago> {
     return this.http.post<Pago>(`${this.url}addpago/`, p, httpOptions);
+  }
+
+  getFacturasElectricas(): Observable<FacturaE[]> {
+    return this.http.get<FacturaE[]>(`${this.url}facturas_electricas/`);
+  }
+  getFacturasAlquiler(): Observable<FacturaA[]> {
+    return this.http.get<FacturaA[]>(`${this.url}facturas_alquiler/`);
   }
 }

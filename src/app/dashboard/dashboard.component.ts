@@ -9,6 +9,7 @@ import { ApartamentoService } from '../services/apartamento.service';
 })
 export class DashboardComponent implements OnInit {
   apartamentos: Apartamento[] = [];
+  apartamentosLibres: Apartamento[] = [];
 
   constructor(private apartamentoService: ApartamentoService) { }
 
@@ -18,6 +19,13 @@ export class DashboardComponent implements OnInit {
 
   getApartamentos(): void {
     this.apartamentoService.getApartamentos()
-      .subscribe(apartamentos => this.apartamentos = apartamentos);
+      .subscribe(apartamentos => {
+        this.apartamentos = apartamentos;
+        apartamentos.forEach(a => {
+          if (!a.ocupado) {
+            this.apartamentosLibres.push(a);
+          }
+        });
+      });
   }
 }

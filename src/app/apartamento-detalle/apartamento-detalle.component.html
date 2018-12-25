@@ -1,19 +1,22 @@
-<ng-container *ngIf="apartamento; else elseTemplate">
-  
-<div >
-  <h2>Apartamento {{apartamento.id}} Detalles</h2>
-  
+<div class="container">
+  <ng-container *ngIf="apartamento; else elseTemplate">
+    
   <div>
-    Nombre Inquilino: {{apartamento.cliente}} <br>
-    <a routerLink="/pagos/{{apartamento.id}}">Talonario</a>  
+    <h2>Apartamento {{apartamento.id}} Detalles</h2>
+    
+    <div>
+      Nombre Inquilino: {{apartamento.cliente}} <br>
+        
+      
+    </div>
+    
+    <button mat-button (click)="empty()">Vaciar</button> <a mat-button routerLink="/pagos/{{apartamento.id}}">Talonario</a>
     
   </div>
-  <button (click)="goBack()">Regresar</button>
+  </ng-container> 
   
+  
+  <ng-template #elseTemplate>
+      Este apartamento esta desocupado! 
+  </ng-template>
 </div>
-</ng-container> 
-
-
-<ng-template #elseTemplate>
-    Este apartamento esta desocupado! 
-</ng-template>
