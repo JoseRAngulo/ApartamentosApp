@@ -9,7 +9,7 @@ import { ContratoService } from '../services/contrato.service';
 import { Contrato } from '../models/contratos';
 
 
-
+// TODO: Remake this probably, add contadores in backend
 @Component({
   selector: 'app-apartamento-detalle',
   templateUrl: './apartamento-detalle.component.html',

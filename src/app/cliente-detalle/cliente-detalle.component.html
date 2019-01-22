@@ -1,3 +1,26 @@
-<p>
-{{cliente.nombre}}
+<p *ngIf="info" class="container">
+    <mat-form-field>
+        <input matInput #nombre placeholder="Nombre" [(ngModel)]="info.nombre">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput #profesion placeholder="Profesion" [(ngModel)]="info.profesion">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput #nacion placeholder="Nacionalidad" [(ngModel)]="info.nacionalidad">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput #identidad placeholder="Identidad" [(ngModel)]="info.identidad">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput #rtn placeholder="RTN" [(ngModel)]="info.rtn">
+    </mat-form-field>
+    <mat-form-field>
+        <textarea matInput #direccion placeholder="Direccion" [(ngModel)]="info.direccion"></textarea>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput #empresa placeholder="Empresa" [(ngModel)]="info.empresa">
+    </mat-form-field>
+         <mat-checkbox [(ngModel)]="info.estadoCivil">Estado Civil</mat-checkbox> 
+    
+         <button mat-raised-button (click)="updateCliente();">Actualizar</button>
 </p>

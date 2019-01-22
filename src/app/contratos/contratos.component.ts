@@ -4,9 +4,9 @@ import { Contrato } from '../models/contratos';
 import { ApartamentoService } from '../services/apartamento.service';
 import { Apartamento } from '../models/apartamentos';
 import { ClienteService } from '../services/cliente.service';
-import { Cliente } from '../models/clientes';
+import { Cliente, ClienteInfo } from '../models/clientes';
 
-
+// TODO: Historial de contratos
 
 @Component({
   selector: 'app-contratos',
@@ -17,6 +17,7 @@ export class ContratosComponent implements OnInit {
   apartamentos: Apartamento[];
   apartamentosLibres: Apartamento[];
   cliente: Cliente;
+  info: ClienteInfo;
   clientes: Cliente[];
   contrato: Contrato;
   id: number;
@@ -43,9 +44,10 @@ export class ContratosComponent implements OnInit {
         });
       });
   }
-  addContrato(nombre: String, apartamento: number, monto: number) {
-    this.cliente = new Cliente(0, nombre, []);
-    this.clienteService.addCliente(this.cliente).subscribe(c => {
+  addContrato(nombre: String, profesion: String, nacionalidad: String, identidad: String, rtn: String, direccion: String,
+              empresa: String, estadoCivil: Boolean, apartamento: number, monto: number) {
+    this.info = new ClienteInfo(0, nombre, profesion, nacionalidad, identidad, rtn, direccion, empresa, estadoCivil);
+    this.clienteService.addCliente(this.info).subscribe(c => {
       this.contrato = new Contrato(0, c.id, monto, new Date(), apartamento, true);
       this.contratoService.addContrato(this.contrato).subscribe();
     });

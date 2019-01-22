@@ -1,8 +1,8 @@
 <h1 mat-dialog-title>Factura {{data.id}} {{data.fecha}}</h1>
 <div mat-dialog-content>
-  <p>Pago</p>
+  <p>Monto pendiente: <strong>{{ data.monto | currency:'HNL':'symbol' }}</strong></p>
   <mat-form-field>
-    <input matInput #monto>
+    <input matInput #monto placeholder="Cantidad Pagado">
   </mat-form-field>
 </div>
 <div mat-dialog-actions>

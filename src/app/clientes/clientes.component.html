@@ -1,5 +1,6 @@
 
-<table mat-table [dataSource]="clientesActivos">
+<h1>Clientes Activos</h1>
+<table mat-table [dataSource]="clientesActivos" *ngIf="clientesActivos">
   
   <ng-container matColumnDef="nombre">
     <th mat-header-cell *matHeaderCellDef> Inquilino </th>
@@ -7,12 +8,16 @@
   </ng-container>
   <ng-container matColumnDef="apartamento">
     <th mat-header-cell *matHeaderCellDef> Apartamento </th>
-    <td mat-cell *matCellDef="let element"><a mat-icon-button routerLink="/detalle-apartamento/{{element.contratos[0].apartamento}}"> {{element.contratos[0].apartamento}} </a></td>
+    <td mat-cell *matCellDef="let element"><a mat-icon-button routerLink="/detalle-apartamento/{{element.contratos[0].apartamento}}"> {{getApartamentoNombre(element.contratos[0].apartamento)}} </a></td>
   </ng-container>
   <ng-container matColumnDef="saldo">
-    <th mat-header-cell *matHeaderCellDef> Saldo </th>
-    <td mat-cell *matCellDef="let element"> {{element.contratos[0].monto}} </td>
+    <th mat-header-cell *matHeaderCellDef> Mensualidad </th>
+    <td mat-cell *matCellDef="let element"> L. {{element.contratos[0].monto}} </td>
   </ng-container>
+  <ng-container matColumnDef="debe">
+      <th mat-header-cell *matHeaderCellDef> Debe </th>
+      <td mat-cell *matCellDef="let element"><span *ngIf="debidos[element.contratos[0].id]">L. {{debidos[element.contratos[0].id].monto}}</span></td>
+    </ng-container>
   <ng-container matColumnDef="factura">
       <th mat-header-cell *matHeaderCellDef> Facturas </th>
       <td mat-cell *matCellDef="let element"> <a mat-icon-button routerLink="/pagos/{{element.contratos[0].id}}"><mat-icon>attach_money</mat-icon></a> </td>
@@ -21,4 +26,6 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   
 </table>
+
+<h1>Clientes Pasados</h1>
 

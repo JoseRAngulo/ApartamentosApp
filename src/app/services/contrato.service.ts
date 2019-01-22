@@ -28,7 +28,7 @@ export class ContratoService {
   addContrato(c: Contrato): Observable<Contrato> {
     return this.http.post<Contrato>(`${this.url}contratos/add`, c, httpOptions);
   }
-  updateContrato (c: Contrato): Observable<Response> {
+  updateContrato(c: Contrato): Observable<Response> {
     return this.http.put<Response>(`${this.url}contratos/${c.id}/edit`, c, httpOptions);
   }
   deleteContrato(c: Contrato) {

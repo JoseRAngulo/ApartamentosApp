@@ -6,7 +6,9 @@ import {
   MatButtonModule, MatSelectModule,
   MatSidenavModule, MatListModule,
   MatTableModule, MatIconModule,
-  MatDialogModule
+  MatDialogModule, MatDatepickerModule,
+  MatNativeDateModule, MatPaginatorModule,
+  MatSortModule, MatCheckboxModule
 } from '@angular/material';
 
 
@@ -22,7 +24,12 @@ import {
     MatTableModule,
     MatGridListModule,
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatCheckboxModule
   ],
   exports: [
     MatInputModule,
@@ -33,7 +40,12 @@ import {
     MatTableModule,
     MatGridListModule,
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatCheckboxModule
   ]
 })
 export class AppMaterialModule { }

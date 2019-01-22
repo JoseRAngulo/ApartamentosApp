@@ -25,6 +25,10 @@ private url = 'http://127.0.0.1:8000/';
     return this.http.get<DetalleApartamento[]>(`${this.url}contratoapartamento/${id}`);
   }
 
+  getApartamento(id: number): Observable<Apartamento> {
+    return this.http.get<Apartamento>(`${this.url}apartamentos/${id}`);
+  }
+
   private log(message: string) {
     this.messageService.add(`HeroService: ${message}`);
   }

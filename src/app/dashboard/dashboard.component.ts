@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Apartamento } from '../models/apartamentos';
 import { ApartamentoService } from '../services/apartamento.service';
 
+// TODO: Graphs and other pretty stuff, low priority
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',

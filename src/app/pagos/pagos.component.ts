@@ -1,10 +1,21 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { Factura, FacturaA, FacturaE } from '../models/facturas';
 import { PagoService } from '../services/pago.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Pago } from '../models/pagos';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+
+import {
+  MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatTable,
+  MatDialogConfig, MatTableDataSource, MatPaginator,
+  MatSort
+} from '@angular/material';
+
+import { FacturasElectricasDialogComponent } from '../facturas-electricas-dialog/facturas-electricas-dialog.component';
+import { ContratoService } from '../services/contrato.service';
+import { ClienteService } from '../services/cliente.service';
+import { Cliente } from '../models/clientes';
+
 
 export interface DialogData {
   id: number;
@@ -20,21 +31,33 @@ export interface DialogData {
 })
 export class PagosComponent implements OnInit {
   facturas: Factura[];
+  pagos: Pago[];
   facturasElectricas: FacturaE[];
   facturasAlquiler: FacturaA[];
-  displayedColumns: string[] = ['fecha', 'monto', 'accion'];
   pago: Pago;
+  cliente: Cliente = new Cliente(0, '', []);
+  dataSource: MatTableDataSource<Pago>;
+  @ViewChild(MatTable) table: MatTable<any>;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
+  displayedColumns: string[] = ['fecha', 'monto', 'accion'];
+  displayedColumnsPago: string[] = ['fecha', 'monto'];
 
   constructor(
     private pagoService: PagoService,
     private route: ActivatedRoute,
     private location: Location,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public contratoService: ContratoService,
+    public clienteService: ClienteService
     ) { }
 
   ngOnInit() {
+    this.getCliente();
     this.getFacturasElectricas();
     this.getFacturasAlquiler();
+    this.getPagosContrato();
   }
   getFacturas(): void {
     const id = +this.route.snapshot.paramMap.get('id');
@@ -52,6 +75,16 @@ export class PagosComponent implements OnInit {
       });
     });
   }
+  getPagosContrato(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.pagoService.getPagosContrato(id)
+      .subscribe(pagos => {
+        this.pagos = pagos;
+        this.dataSource = new MatTableDataSource<Pago>(pagos);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      });
+  }
   getFacturasAlquiler(): void {
     const id = +this.route.snapshot.paramMap.get('id');
     this.pagoService.getFacturasAlquiler().subscribe(facturas => {
@@ -64,12 +97,50 @@ export class PagosComponent implements OnInit {
     });
   }
 
+  getCliente(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.contratoService.getContrato(id).subscribe(contrato => {
+      this.clienteService.getCliente(contrato.cliente).subscribe(cliente => this.cliente = cliente);
+    });
+  }
+
 
   openDialog(i: number, m: number, f: Date): void {
     const dialogRef = this.dialog.open(DialogComponent, {
-      width: '100%',
+      width: '400px',
       data: {id: i, monto: m, fecha: f}
     });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.getFacturasAlquiler();
+      this.getFacturasElectricas();
+      this.getPagosContrato();
+    });
+  }
+
+  pagoRapido(i: number, m: number, f: Date): void {
+    this.pago = new Pago(m, i, f);
+    this.pagoService.addPago(this.pago).subscribe(() => {
+      this.getPagosContrato();
+      this.getFacturasAlquiler();
+      this.getFacturasElectricas();
+    });
+  }
+
+  openDialogElec(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {
+      id: id
+    };
+    const dialogRef = this.dialog.open(FacturasElectricasDialogComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.getFacturasElectricas();
+    });
+  }
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }
 
@@ -80,6 +151,7 @@ export class PagosComponent implements OnInit {
 })
 export class DialogComponent {
   pago: Pago;
+
   constructor(
     public dialogRef: MatDialogRef<DialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,

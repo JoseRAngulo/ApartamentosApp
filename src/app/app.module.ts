@@ -15,6 +15,7 @@ import { ContratosComponent } from './contratos/contratos.component';
 import { ClientesComponent } from './clientes/clientes.component';
 import { ClienteDetalleComponent } from './cliente-detalle/cliente-detalle.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FacturasElectricasDialogComponent } from './facturas-electricas-dialog/facturas-electricas-dialog.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ContratosComponent,
     ClientesComponent,
     ClienteDetalleComponent,
-    DialogComponent
+    DialogComponent,
+    FacturasElectricasDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -39,6 +41,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [DialogComponent]
+  entryComponents: [DialogComponent, FacturasElectricasDialogComponent]
 })
 export class AppModule { }

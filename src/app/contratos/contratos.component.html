@@ -1,22 +1,33 @@
-
-        <div class="container">
-            <mat-form-field>
-                <input matInput #nombre placeholder="Nombre">
-              </mat-form-field>
-              <mat-form-field>
-                <mat-select placeholder="Apartamento" #apartamento>
-                  <mat-option *ngFor="let apartamento of apartamentosLibres" value="{{apartamento.id}}">{{apartamento.nombre}}</mat-option>
-                </mat-select>
-              </mat-form-field>
-              <mat-form-field>
-                <input matInput #monto placeholder="Cobro Mensual">
-              </mat-form-field>
-              <button mat-raised-button (click)="addContrato(nombre.value, apartamento.value, monto.value);">Agregar</button>  
-        </div>
-            
-        
-    
-
-
-
-
+<div class="container">
+  <mat-form-field>
+    <input matInput #nombre placeholder="Nombre">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput #profesion placeholder="Profesion" >
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput #nacion placeholder="Nacionalidad" >
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput #identidad placeholder="Identidad">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput #rtn placeholder="RTN">
+  </mat-form-field>
+  <mat-form-field>
+    <textarea matInput #direccion placeholder="Direccion"></textarea>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput #empresa placeholder="Empresa">
+  </mat-form-field>
+  <mat-checkbox #estadocivil>Estado Civil</mat-checkbox>
+  <mat-form-field>
+    <mat-select placeholder="Apartamento" #apartamento>
+      <mat-option *ngFor="let apartamento of apartamentosLibres" value="{{apartamento.id}}">{{apartamento.nombre}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput #monto placeholder="Cobro Mensual">
+  </mat-form-field>
+  <button mat-raised-button (click)="addContrato(nombre.value, profesion.value, nacion.value, identidad.value, rtn.value, direccion.value, empresa.value, estadocivil.value, apartamento.value, monto.value);">Agregar</button>
+</div>
