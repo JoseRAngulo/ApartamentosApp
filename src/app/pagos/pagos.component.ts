@@ -37,9 +37,9 @@ export class PagosComponent implements OnInit {
   pago: Pago;
   cliente: Cliente = new Cliente(0, '', []);
   dataSource: MatTableDataSource<Pago>;
-  @ViewChild(MatTable) table: MatTable<any>;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatTable, { static: false }) table: MatTable<any>;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   displayedColumns: string[] = ['fecha', 'monto', 'accion'];
   displayedColumnsPago: string[] = ['fecha', 'monto'];
