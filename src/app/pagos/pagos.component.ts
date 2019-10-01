@@ -5,11 +5,10 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Pago } from '../models/pagos';
 
-import {
-  MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatTable,
-  MatDialogConfig, MatTableDataSource, MatPaginator,
-  MatSort
-} from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 
 import { FacturasElectricasDialogComponent } from '../facturas-electricas-dialog/facturas-electricas-dialog.component';
 import { ContratoService } from '../services/contrato.service';
